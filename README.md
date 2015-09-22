@@ -38,7 +38,7 @@ Loading single library from Git:
 ```groovy
 stage 'Load libs from GitHub'
 def helloworld = libManager.fromGit('lib/helloworld', 
-      'git@github.com:jenkinsci/workflow-samples-lib.git', 'master', null, '')
+        'git@github.com:jenkinsci/workflow-samples-lib.git', 'master', null, '')
 
 stage 'Run library contents'
 helloworld.printHello()
@@ -49,10 +49,9 @@ Loading multiple libraries from Git:
 stage 'Load libs from GitHub'
 def environment, helloworld
 libManager.withGit('git@github.com:jenkinsci/workflow-samples-lib.git', 'master', null, '') {
-        helloworld = libManager.load('lib/helloworld');
-        environment = libManager.load('lin/environment');
-      }
-def helloworld = libs['lib/helloworld'];
+    helloworld = libManager.load('lib/helloworld');
+    environment = libManager.load('lin/environment');
+}
 
 stage 'Run library contents'
 helloworld.printHello()
