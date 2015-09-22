@@ -34,7 +34,7 @@ The loading behaves similarly to the built-in `load` command, see [Workflow docu
 
 ### Examples
 
-Loading single library from Git:
+Loading a single library from Git:
 ```groovy
 stage 'Load libs from GitHub'
 def helloworld = libManager.fromGit('lib/helloworld', 
@@ -50,7 +50,7 @@ stage 'Load libs from GitHub'
 def environment, helloworld
 libManager.withGit('git@github.com:jenkinsci/workflow-samples-lib.git', 'master', null, '') {
     helloworld = libManager.load('lib/helloworld');
-    environment = libManager.load('lin/environment');
+    environment = libManager.load('lib/environment');
 }
 
 stage 'Run library contents'
