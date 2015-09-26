@@ -29,7 +29,8 @@ import org.jenkinsci.plugins.scriptsecurity.sandbox.whitelists.ProxyWhitelist;
 import org.jenkinsci.plugins.scriptsecurity.sandbox.whitelists.StaticWhitelist;
 
 /**
- * Provides a &quot;fileLoder&quot; global variable.
+ * Provides a &quot;fileLoader&quot; global variable.
+ * This variable allows to load Workflow objects from remote locations (e.g. Git repositories).
  * @author Oleg Nenashev
  */
 @Extension
@@ -45,8 +46,9 @@ public class FileLoaderDSL extends GroovyFileGlobalVariable {
         return "org.jenkinsci.plugins.workflow.lib_manager.FileLoader";
     }
 
-    @Extension 
+    @Extension
     public static class MiscWhitelist extends ProxyWhitelist {
+
         public MiscWhitelist() throws IOException {
             super(new StaticWhitelist(
                     "method groovy.lang.Closure call java.lang.Object",

@@ -24,17 +24,14 @@
 package org.jenkinsci.plugins.workflow.lib_manager;
 
 import groovy.lang.Binding;
-import hudson.Extension;
-import java.io.IOException;
 import javax.annotation.Nonnull;
 import org.jenkinsci.plugins.scriptsecurity.sandbox.whitelists.ProxyWhitelist;
-import org.jenkinsci.plugins.scriptsecurity.sandbox.whitelists.StaticWhitelist;
 import org.jenkinsci.plugins.workflow.cps.CpsScript;
 import org.jenkinsci.plugins.workflow.cps.GlobalVariable;
 
 /**
  * Implements Global variable, which is implemented via Groovy file.
- * Exclusions should be configured separately.
+ * Exclusions should be configured separately using {@link ProxyWhitelist}.
  * @author Oleg Nenashev
  */
 public abstract class GroovyFileGlobalVariable extends GlobalVariable {
