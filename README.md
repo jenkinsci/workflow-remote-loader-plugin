@@ -12,11 +12,11 @@ Supported features:
 
 ## Usage
 
-The plugin adds a global `libManager` variable, which can be used to invoke the Workflow library loading from multiple sources. 
+The plugin adds a global `fileLoader` variable, which can be used to invoke the Workflow library loading from multiple sources. 
 
 ### Available commands
 
-The `libManager` variable provides the following methods:
+The `fileLoader` variable provides the following methods:
 * `fromGit(String libPath, String repository, String branch, String credentialsId, String labelExpression)` - loading of a single library from Git repository
 * `withGit(String repository, String branch, String credentialsId, String labelExpression)` - wrapper for a multiple libs loading from a same Git repo
 * `load(String libPath)` - loading of library by a relative path. Also can be used within `withGit` wrapper
@@ -30,14 +30,14 @@ Parameters:
 
 ### Library format
 
-The loading behaves similarly to the built-in `load` command, see [Workflow documentation](https://github.com/jenkinsci/workflow-plugin/blob/master/TUTORIAL.md#manual-loading) for more info about library file syntax. Only one file is being loaded by commands from `libManager`. Use static initializers within the Groovy file of the loaded file to load more context from neighbor files.
+The loading behaves similarly to the built-in `load` command, see [Workflow documentation](https://github.com/jenkinsci/workflow-plugin/blob/master/TUTORIAL.md#manual-loading) for more info about library file syntax. Only one file is being loaded by commands from `fileLoader`. Use static initializers within the Groovy file of the loaded file to load more context from neighbor files.
 
 ### Examples
 
 Loading a single library from Git:
 ```groovy
 stage 'Load libs from GitHub'
-def helloworld = libManager.fromGit('lib/helloworld', 
+def helloworld = fileLoader.fromGit('lib/helloworld', 
         'git@github.com:jenkinsci/workflow-samples-lib.git', 'master', null, '')
 
 stage 'Run library contents'
@@ -48,9 +48,9 @@ Loading multiple libraries from Git:
 ```groovy
 stage 'Load libs from GitHub'
 def environment, helloworld
-libManager.withGit('git@github.com:jenkinsci/workflow-samples-lib.git', 'master', null, '') {
-    helloworld = libManager.load('lib/helloworld');
-    environment = libManager.load('lib/environment');
+fileLoader.withGit('git@github.com:jenkinsci/workflow-samples-lib.git', 'master', null, '') {
+    helloworld = fileLoader.load('lib/helloworld');
+    environment = fileLoader.load('lib/environment');
 }
 
 stage 'Run library contents'

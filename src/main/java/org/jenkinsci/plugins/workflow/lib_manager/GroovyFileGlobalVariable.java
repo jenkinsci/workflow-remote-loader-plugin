@@ -26,44 +26,37 @@ package org.jenkinsci.plugins.workflow.lib_manager;
 import groovy.lang.Binding;
 import hudson.Extension;
 import java.io.IOException;
+import javax.annotation.Nonnull;
 import org.jenkinsci.plugins.scriptsecurity.sandbox.whitelists.ProxyWhitelist;
 import org.jenkinsci.plugins.scriptsecurity.sandbox.whitelists.StaticWhitelist;
 import org.jenkinsci.plugins.workflow.cps.CpsScript;
 import org.jenkinsci.plugins.workflow.cps.GlobalVariable;
 
 /**
- *
+ * Implements Global variable, which is implemented via Groovy file.
+ * Exclusions should be configured separately.
  * @author Oleg Nenashev
  */
-@Extension
-public class PluginDSL extends GlobalVariable {
+public abstract class GroovyFileGlobalVariable extends GlobalVariable {
     
-    @Override 
-    public String getName() {
-        return "libManager";
-    }
+    /**
+     * Canonical name of the class to be loaded.
+     * @return Canonical class name
+     */
+    @Nonnull
+    public abstract String getClassName();
 
     @Override 
-    public Object getValue(CpsScript script) throws Exception {
-        Binding binding = script.getBinding();
-        Object libManager;
+    public final Object getValue(CpsScript script) throws Exception {
+        final Binding binding = script.getBinding();
+        final Object loadedObject;
         if (binding.hasVariable(getName())) {
-            libManager = binding.getVariable(getName());
+            loadedObject = binding.getVariable(getName());
         } else {
             // Note that if this were a method rather than a constructor, we would need to mark it @NonCPS lest it throw CpsCallableInvocation.
-            libManager = script.getClass().getClassLoader().loadClass("org.jenkinsci.plugins.workflow.lib_manager.LibManager").getConstructor(CpsScript.class).newInstance(script);
-            binding.setVariable(getName(), libManager);
+            loadedObject = script.getClass().getClassLoader().loadClass(getClassName()).getConstructor(CpsScript.class).newInstance(script);
+            binding.setVariable(getName(), loadedObject);
         }
-        return libManager;
-    }
-
-    @Extension public static class MiscWhitelist extends ProxyWhitelist {
-        public MiscWhitelist() throws IOException {
-            super(new StaticWhitelist(
-                    "method groovy.lang.Closure call java.lang.Object",
-                    "method java.lang.Object toString",
-                    "method groovy.lang.GroovyObject invokeMethod java.lang.String java.lang.Object"
-            ));
-        }
+        return loadedObject;
     }
 }
