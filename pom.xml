@@ -8,12 +8,13 @@
     <version>1.609.1</version>
     <relativePath />
   </parent>
-  <artifactId>workflow-lib-manager</artifactId>
+  <groupId>org.jenkins-ci.plugins.workflow</groupId>
+  <artifactId>remote-loader</artifactId>
   <version>1.0-SNAPSHOT</version>
   <packaging>hpi</packaging>
 
-  <name>Jenkins Workflow Library Manager Plugin</name>
-  <description>A simple library manager for Workflow</description>
+  <name>Jenkins Workflow Remote Loader Plugin</name>
+  <description>Allows loading Workflow groovy files from remote locations (enhanced version of the built-in load command)</description>
   <url>https://wiki.jenkins-ci.org/display/JENKINS/TODO</url>
   <licenses>
     <license>

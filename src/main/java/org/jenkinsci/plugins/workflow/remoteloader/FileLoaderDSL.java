@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package org.jenkinsci.plugins.workflow.lib_manager;
+package org.jenkinsci.plugins.workflow.remoteloader;
 
 import hudson.Extension;
 import java.io.IOException;
@@ -35,17 +35,12 @@ import org.jenkinsci.plugins.scriptsecurity.sandbox.whitelists.StaticWhitelist;
  */
 @Extension
 public class FileLoaderDSL extends GroovyFileGlobalVariable {
-    
+
     @Override 
     public String getName() {
         return "fileLoader";
     }
-
-    @Override
-    public String getClassName() {
-        return "org.jenkinsci.plugins.workflow.lib_manager.FileLoader";
-    }
-
+    
     @Extension
     public static class MiscWhitelist extends ProxyWhitelist {
 

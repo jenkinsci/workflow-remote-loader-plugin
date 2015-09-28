@@ -21,11 +21,11 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package org.jenkinsci.plugins.workflow.lib_manager
+package org.jenkinsci.plugins.workflow.remoteloader
 
 import org.jenkinsci.plugins.workflow.cps.CpsScript;
 
-class LibManager implements Serializable {
+class FileLoaderDSLImpl implements Serializable {
   
   private CpsScript script
   
@@ -35,7 +35,7 @@ class LibManager implements Serializable {
   private static final String TMP_FOLDER = 'libLoader'
   
 
-  public LibManager(CpsScript script) {
+  public FileLoaderDSLImpl(CpsScript script) {
     this.script = script
   }
 

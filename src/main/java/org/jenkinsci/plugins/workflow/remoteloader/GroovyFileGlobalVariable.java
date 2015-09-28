@@ -21,19 +21,22 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package org.jenkinsci.plugins.workflow.lib_manager;
+package org.jenkinsci.plugins.workflow.remoteloader;
 
 import groovy.lang.Binding;
 import javax.annotation.Nonnull;
 import org.jenkinsci.plugins.scriptsecurity.sandbox.whitelists.ProxyWhitelist;
 import org.jenkinsci.plugins.workflow.cps.CpsScript;
 import org.jenkinsci.plugins.workflow.cps.GlobalVariable;
+import org.kohsuke.accmod.Restricted;
+import org.kohsuke.accmod.restrictions.NoExternalUse;
 
 /**
  * Implements Global variable, which is implemented via Groovy file.
  * Exclusions should be configured separately using {@link ProxyWhitelist}.
  * @author Oleg Nenashev
  */
+@Restricted(NoExternalUse.class)
 public abstract class GroovyFileGlobalVariable extends GlobalVariable {
     
     /**
@@ -41,7 +44,9 @@ public abstract class GroovyFileGlobalVariable extends GlobalVariable {
      * @return Canonical class name
      */
     @Nonnull
-    public abstract String getClassName();
+    public String getClassName() {
+        return getClass().getName() + ".Impl";
+    }
 
     @Override 
     public final Object getValue(CpsScript script) throws Exception {
