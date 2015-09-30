@@ -68,8 +68,9 @@ class FileLoaderDSLImpl implements Serializable {
   }
   
   public Object load(String libPath) {
-    script.echo "Loading from ${libPath}.groovy"
-    def lib = script.load "${libPath}.groovy"
+    def effectiveLibPath = libPath.endsWith(".groovy") ? libPath : libPath + ".groovy";
+    script.echo "Loading from ${effectiveLibPath}"
+    def lib = script.load "${effectiveLibPath}"
     //TODO:version checks, etc.
     return lib;
   }
