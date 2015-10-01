@@ -1,25 +1,25 @@
-# Workflow Library Manager Plugin
+# Workflow Remote File Loader Plugin
 
 ## Summary
 
-The plugin provides a primitive management of Workflow library scripts.
+The plugin simplifies the usage of the shared functionality in [Workflow](https://github.com/jenkinsci/workflow-plugin) scripts.
+It allows to keep the logic in remote files in SCMs and load them on-demand.
 
 **Warning!** The project is a **Proof of concept**. The functionality may change before the release (if it happens, of course). Use it on your own risk.
 
 Supported features:
-* Library loading from Git and Github (requires an installed Git plugin)
-* Multiple library Loading from a local file
+* Groovy file loading from Git and Github (requires an installed Git plugin)
 
 ## Usage
 
-The plugin adds a global `fileLoader` variable, which can be used to invoke the Workflow library loading from multiple sources. 
+The plugin adds a global `fileLoader` DSL variable, which provides methods for loading Workflow objects from remote sources. 
 
-### Available commands
+### Available methods
 
 The `fileLoader` variable provides the following methods:
-* `fromGit(String libPath, String repository, String branch, String credentialsId, String labelExpression)` - loading of a single library from Git repository
-* `withGit(String repository, String branch, String credentialsId, String labelExpression)` - wrapper for a multiple libs loading from a same Git repo
-* `load(String libPath)` - loading of library by a relative path. Also can be used within `withGit` wrapper
+* `fromGit(String libPath, String repository, String branch, String credentialsId, String labelExpression)` - loading of a single Groovy file from the specified Git repository
+* `withGit(String repository, String branch, String credentialsId, String labelExpression)` - wrapper closure for multiple files loading from a same Git repo
+* `load(String libPath)` - loading of an object from a Groovy file specified by the relative path. Also can be used within `withGit()` closure to load multiple objects at once
 
 Parameters:
 * `libPath` - a relative path to the file, ".groovy" extension will be added automatically
@@ -28,32 +28,32 @@ Parameters:
 * `credentialsId` - Optional: Credentials to be used for the Git repo checkout. Default value: `null` (unauthorized access)
 * `labelExpression` - Optional: label expression, which specifies a node to be used for checkout. Default value: empty string (runs on any node)
 
-### Library format
+### Groovy file format
 
 The loading behaves similarly to the built-in `load` command, see [Workflow documentation](https://github.com/jenkinsci/workflow-plugin/blob/master/TUTORIAL.md#manual-loading) for more info about library file syntax. Only one file is being loaded by commands from `fileLoader`. Use static initializers within the Groovy file of the loaded file to load more context from neighbor files.
 
 ### Examples
 
-Loading a single library from Git:
+Loading a single Groovy file from Git:
 ```groovy
-stage 'Load libs from GitHub'
+stage 'Load a file from GitHub'
 def helloworld = fileLoader.fromGit('lib/helloworld', 
         'git@github.com:jenkinsci/workflow-samples-lib.git', 'master', null, '')
 
-stage 'Run library contents'
+stage 'Run method from the loaded file'
 helloworld.printHello()
 ```
 
-Loading multiple libraries from Git:
+Loading multiple files from Git:
 ```groovy
-stage 'Load libs from GitHub'
+stage 'Load files from GitHub'
 def environment, helloworld
 fileLoader.withGit('git@github.com:jenkinsci/workflow-samples-lib.git', 'master', null, '') {
     helloworld = fileLoader.load('lib/helloworld');
     environment = fileLoader.load('lib/environment');
 }
 
-stage 'Run library contents'
+stage 'Run methods from the loaded content'
 helloworld.printHello()
 environment.dumpEnvVars()
 ```

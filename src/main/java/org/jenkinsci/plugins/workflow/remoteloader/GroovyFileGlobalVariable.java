@@ -49,7 +49,7 @@ public abstract class GroovyFileGlobalVariable extends GlobalVariable {
     }
 
     @Override 
-    public final Object getValue(CpsScript script) throws Exception {
+    public final Object getValue(CpsScript script) throws Exception {   
         final Binding binding = script.getBinding();
         final Object loadedObject;
         if (binding.hasVariable(getName())) {
