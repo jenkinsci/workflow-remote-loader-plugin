@@ -37,8 +37,8 @@ The loading behaves similarly to the built-in `load` command, see [Workflow docu
 Loading a single Groovy file from Git:
 ```groovy
 stage 'Load a file from GitHub'
-def helloworld = fileLoader.fromGit('lib/helloworld', 
-        'git@github.com:jenkinsci/workflow-samples-lib.git', 'master', null, '')
+def helloworld = fileLoader.fromGit('examples/fileLoader/helloworld', 
+        'https://github.com/jenkinsci/workflow-remote-loader-plugin.git', 'master', null, '')
 
 stage 'Run method from the loaded file'
 helloworld.printHello()
@@ -48,9 +48,9 @@ Loading multiple files from Git:
 ```groovy
 stage 'Load files from GitHub'
 def environment, helloworld
-fileLoader.withGit('git@github.com:jenkinsci/workflow-samples-lib.git', 'master', null, '') {
-    helloworld = fileLoader.load('lib/helloworld');
-    environment = fileLoader.load('lib/environment');
+fileLoader.withGit('https://github.com/jenkinsci/workflow-remote-loader-plugin.git', 'master', null, '') {
+    helloworld = fileLoader.load('examples/fileLoader/helloworld');
+    environment = fileLoader.load('examples/fileLoader/environment');
 }
 
 stage 'Run methods from the loaded content'
