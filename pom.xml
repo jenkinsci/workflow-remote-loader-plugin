@@ -15,7 +15,7 @@
 
   <name>Jenkins Workflow Remote Loader Plugin</name>
   <description>Allows loading Workflow groovy files from remote locations (enhanced version of the built-in load command)</description>
-  <url>https://wiki.jenkins-ci.org/display/JENKINS/TODO</url>
+  <url>https://wiki.jenkins-ci.org/display/JENKINS/Workflow+Remote+Loader+Plugin</url>
   <licenses>
     <license>
       <name>MIT License</name>
