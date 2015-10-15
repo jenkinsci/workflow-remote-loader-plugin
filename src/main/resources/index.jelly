@@ -23,6 +23,6 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 -->
 <div>
-  A simple library manager for Workflow
+  Allows loading Workflow groovy files from remote locations (enhanced version of the built-in load command)
 </div>
 
