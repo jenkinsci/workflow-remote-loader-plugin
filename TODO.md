@@ -6,7 +6,7 @@ Before 1.0
 ---
 
 Code:
-* [ ] Replace rm calls by rmDir in workflow 1.11
+* [x] Replace rm calls by rmDir in workflow 1.11
 * [ ] Add fromGithub() command
 * [x] Replace "loadLib()" by "loadFile()" (etc.) in order to address the comments from @jglick
 * [ ] Node-free implementation with a checkout to Jenkins server's TMP files ("must" for classpaths)

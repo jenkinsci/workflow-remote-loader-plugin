@@ -53,17 +53,21 @@ class FileLoaderDSLImpl implements Serializable {
     Map<String, Object> loaded = new TreeMap<String, Object>()
     node(labelExpression) {
       withTimestamper {
-        script.sh "rm -rf ${TMP_FOLDER}"
         script.dir(TMP_FOLDER) {
+          // Flush the directory
+          script.deleteDir()
+
           // Checkout
           script.echo "Checking out ${repoUrl}, branch=${repoBranch}"
           script.git changelog: false, poll: false, url: repoUrl, branch: repoBranch, credentialsId: credentialsId
           
           // Invoke body in the folder
           body();
+
+          // Flush the directory again
+          script.deleteDir()
         }
       }
-      script.sh "rm -rf ${TMP_FOLDER}"
     }
   }
   
