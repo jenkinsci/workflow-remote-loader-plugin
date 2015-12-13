@@ -6,7 +6,7 @@ Before 1.0
 ---
 
 Code:
-* [x] Replace rm calls by rmDir in workflow 1.11
+* [x] Replace rm calls by deleteDir in workflow 1.11
 * [x] Replace "loadLib()" by "loadFile()" (etc.) in order to address the comments from @jglick
 
 Documentation:
