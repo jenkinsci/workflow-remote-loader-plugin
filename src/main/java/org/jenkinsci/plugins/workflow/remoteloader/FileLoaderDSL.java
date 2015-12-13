@@ -66,6 +66,7 @@ public class FileLoaderDSL extends GroovyFileGlobalVariable {
 
         public MiscWhitelist() throws IOException {
             super(new StaticWhitelist(
+                    "new java.util.TreeMap",
                     "method groovy.lang.Closure call java.lang.Object",
                     "method java.lang.Object toString",
                     "method groovy.lang.GroovyObject invokeMethod java.lang.String java.lang.Object"

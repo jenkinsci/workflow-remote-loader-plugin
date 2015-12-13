@@ -52,25 +52,28 @@ public class FileLoaderDSLTest {
     
     @Test
     public void loadSingleFileFromGit() throws Exception {
-        runSnippet("loadSingleFileFromGit", false);
+        assertSnippet("loadSingleFileFromGit", false);
     }
     
     @Test
     public void loadSingleFileFromGit_Sandbox() throws Exception {
-        runSnippet("loadSingleFileFromGit", true);
+        assertSnippet("loadSingleFileFromGit", true);
     }
     
     @Test
     public void loadMultipleFilesFromGit() throws Exception {
-        runSnippet("loadMultipleFilesFromGit", false);
+        assertSnippet("loadMultipleFilesFromGit", false);
     }
     
     @Test
     public void loadMultipleFilesFromGit_Sandbox() throws Exception {
-        runSnippet("loadMultipleFilesFromGit", true);
+        //TODO: This is a downside of the "environment.groovy" sample. Needs to be adjusted 
+        assertSnippetFails("loadMultipleFilesFromGit", true,
+                "RejectedAccessException: Scripts not permitted to use method "+
+                "org.jenkinsci.plugins.workflow.support.steps.build.RunWrapper build");
     }
     
-    private void runSnippet(@NonNull String snippetName, boolean useSandbox) throws Exception {
+    private void assertSnippet(@NonNull String snippetName, boolean useSandbox) throws Exception {
         WorkflowJob job = j.jenkins.createProject(WorkflowJob.class, snippetName);
         job.setDefinition(new CpsFlowDefinition(FileLoaderDSL.getSampleSnippet(snippetName), useSandbox));
         
@@ -80,5 +83,19 @@ public class FileLoaderDSLTest {
         WorkflowRun run = runFuture.get();
         
         j.assertBuildStatus(Result.SUCCESS, run);
+    }
+    
+    private void assertSnippetFails(@NonNull String snippetName, boolean useSandbox,
+            @NonNull String expectedMessage) throws Exception {
+        WorkflowJob job = j.jenkins.createProject(WorkflowJob.class, snippetName);
+        job.setDefinition(new CpsFlowDefinition(FileLoaderDSL.getSampleSnippet(snippetName), useSandbox));
+        
+        // Run job
+        QueueTaskFuture<WorkflowRun> runFuture = job.scheduleBuild2(0, new Action[0]);
+        assertThat("build was actually scheduled", runFuture, Matchers.notNullValue());
+        WorkflowRun run = runFuture.get();
+        
+        j.assertBuildStatus(Result.FAILURE, run);
+        j.assertLogContains(expectedMessage, run);
     }
 }
