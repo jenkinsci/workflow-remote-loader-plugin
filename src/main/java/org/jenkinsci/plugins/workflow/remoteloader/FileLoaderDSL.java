@@ -25,8 +25,12 @@ package org.jenkinsci.plugins.workflow.remoteloader;
 
 import hudson.Extension;
 import java.io.IOException;
+import java.io.InputStream;
+import org.apache.commons.io.IOUtils;
 import org.jenkinsci.plugins.scriptsecurity.sandbox.whitelists.ProxyWhitelist;
 import org.jenkinsci.plugins.scriptsecurity.sandbox.whitelists.StaticWhitelist;
+import org.kohsuke.accmod.Restricted;
+import org.kohsuke.accmod.restrictions.NoExternalUse;
 
 /**
  * Provides a &quot;fileLoader&quot; global variable.
@@ -41,11 +45,28 @@ public class FileLoaderDSL extends GroovyFileGlobalVariable {
         return "fileLoader";
     }
     
+    /**
+     * Loads a snippet from the resource file.
+     * @param name Name of the snippet (e.g. &quot;loadMultipleFiles&quot;)
+     * @return Workflow script text
+     * @throws IOException Loading error
+     */
+    @Restricted(NoExternalUse.class)
+    public static String getSampleSnippet(String name) throws IOException {
+        final String resourceName = "FileLoaderDSL/sample_" + name + ".groovy";
+        final InputStream scriptStream = FileLoaderDSL.class.getResourceAsStream(resourceName);
+        if (scriptStream == null) {
+            throw new IOException("Cannot find sample script in " + resourceName);
+        }
+        return IOUtils.toString(scriptStream, "UTF-8");
+    }
+    
     @Extension
     public static class MiscWhitelist extends ProxyWhitelist {
 
         public MiscWhitelist() throws IOException {
             super(new StaticWhitelist(
+                    "new java.util.TreeMap",
                     "method groovy.lang.Closure call java.lang.Object",
                     "method java.lang.Object toString",
                     "method groovy.lang.GroovyObject invokeMethod java.lang.String java.lang.Object"
