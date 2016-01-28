@@ -1,8 +1,8 @@
-# Workflow Remote File Loader Plugin
+# Pipeline Remote File Loader Plugin
 
 ## Summary
 
-The plugin simplifies the usage of the shared functionality in [Workflow](https://github.com/jenkinsci/workflow-plugin) scripts.
+The plugin simplifies the usage of the shared functionality in [Pipeline](https://github.com/jenkinsci/workflow-plugin) scripts.
 It allows to keep the logic in remote files in SCMs and load them on-demand.
 
 **Warning!** The project is a **Proof of concept**. The functionality may change before the release (if it happens, of course). Use it on your own risk.
@@ -12,7 +12,7 @@ Supported features:
 
 ## Usage
 
-The plugin adds a global `fileLoader` DSL variable, which provides methods for loading Workflow objects from remote sources. 
+The plugin adds a global `fileLoader` DSL variable, which provides methods for loading Pipeline objects from remote sources.
 
 ### Available methods
 
@@ -30,7 +30,7 @@ Parameters:
 
 ### Groovy file format
 
-The loading behaves similarly to the built-in `load` command, see [Workflow documentation](https://github.com/jenkinsci/workflow-plugin/blob/master/TUTORIAL.md#manual-loading) for more info about library file syntax. Only one file is being loaded by commands from `fileLoader`. Use static initializers within the Groovy file of the loaded file to load more context from neighbor files.
+The loading behaves similarly to the built-in `load` command, see [Pipeline documentation](https://github.com/jenkinsci/workflow-plugin/blob/master/TUTORIAL.md#manual-loading) for more info about library file syntax. Only one file is being loaded by commands from `fileLoader`. Use static initializers within the Groovy file of the loaded file to load more context from neighbor files.
 
 ### Examples
 

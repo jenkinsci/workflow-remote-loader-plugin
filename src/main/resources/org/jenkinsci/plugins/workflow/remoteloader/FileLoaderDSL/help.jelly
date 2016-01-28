@@ -1,6 +1,6 @@
 <?jelly escape-by-default='true'?>
 <div>
-  Provides methods for loading Workflow objects from remote sources.
+  Provides methods for loading Pipeline objects from remote sources.
   More info about available methods and their parameters: <a href="">the plugin's Wiki page</a>
   
   <h3>Available methods</h3>  

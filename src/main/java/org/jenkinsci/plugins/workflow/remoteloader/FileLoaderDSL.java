@@ -34,7 +34,7 @@ import org.kohsuke.accmod.restrictions.NoExternalUse;
 
 /**
  * Provides a &quot;fileLoader&quot; global variable.
- * This variable allows to load Workflow objects from remote locations (e.g. Git repositories).
+ * This variable allows to load Pipeline objects from remote locations (e.g. Git repositories).
  * @author Oleg Nenashev
  */
 @Extension
