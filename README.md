@@ -5,8 +5,6 @@
 The plugin simplifies the usage of the shared functionality in [Pipeline](https://github.com/jenkinsci/workflow-plugin) scripts.
 It allows to keep the logic in remote files in SCMs and load them on-demand.
 
-**Warning!** The project is a **Proof of concept**. The functionality may change before the release (if it happens, of course). Use it on your own risk.
-
 Supported features:
 * Groovy file loading from Git and Github (requires an installed Git plugin)
 
