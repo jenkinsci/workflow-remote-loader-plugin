@@ -2,17 +2,6 @@
 TODOs
 =====
 
-Before 1.0
----
-
-Code:
-* [x] Replace rm calls by deleteDir in Pipeline 1.11
-* [x] Replace "loadLib()" by "loadFile()" (etc.) in order to address the comments from @jglick
-
-Documentation:
-* [x] Add sample Pipeline files to this repo
-* [x] Reflect new commands in the doc
-
 Medium-term TODOs (ETA is TBD)
 ---
 * [ ] Bulk loading command (proposed by @tfennely)
