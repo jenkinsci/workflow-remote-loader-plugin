@@ -66,7 +66,7 @@ import java.util.List;
 public class UseRemoteLibraryStep extends AbstractStepImpl implements Serializable {
 
     private static final String CLASSPATH_DIR = "src";
-    private static final String VARS_PREFIX = "vars";
+    public static final String VARS_PREFIX = "vars";
     private final String url;
     private String branch = "master";
     private String credentialsId;
@@ -115,19 +115,6 @@ public class UseRemoteLibraryStep extends AbstractStepImpl implements Serializab
             //TODO bare checkout in job dir and reference checkout to branch in job dir to save space
             checkout(ws);
             flow.getShell().getClassLoader().addURL(ws.child(CLASSPATH_DIR).toURI().toURL());
-            Binding binding = flow.getShell().getContext();
-            FilePath[] filePaths = ws.child(VARS_PREFIX).list("*.groovy");
-            for (FilePath file : filePaths) {
-                String name = file.getBaseName();
-                if (!binding.hasVariable(name)) {
-                    Script instance = flow.getShell().parse(new File(file.getRemote()));
-                    binding.setVariable(name, instance);
-                } else {
-                    listener.getLogger().println("WARNING: A variable named " + name + " is already bound to the workflow context, " +
-                            "ignoring implementation in remote library.");
-                }
-            }
-
             return null;
         }
 
@@ -146,7 +133,7 @@ public class UseRemoteLibraryStep extends AbstractStepImpl implements Serializab
 
         private FilePath locateWorkArea(String url, Run<?, ?> run) {
             String hex = DigestUtils.sha1Hex(DigestUtils.sha1(url));
-            return new FilePath(run.getRootDir()).child("wf-remote-libraries").child(hex);
+            return getLibraryRootFor(run).child(hex);
         }
 
         private GitClient createGitClient(FilePath ws) throws IOException, InterruptedException {
@@ -170,6 +157,10 @@ public class UseRemoteLibraryStep extends AbstractStepImpl implements Serializab
         }
 
         private static final long serialVersionUID = 1L;
+    }
+
+    public static FilePath getLibraryRootFor(Run<?, ?> run) {
+        return new FilePath(run.getRootDir()).child("wf-remote-libraries");
     }
 
     @Extension

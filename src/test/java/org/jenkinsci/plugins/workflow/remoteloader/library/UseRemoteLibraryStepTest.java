@@ -27,7 +27,6 @@ import hudson.model.queue.QueueTaskFuture;
 import org.jenkinsci.plugins.workflow.cps.CpsFlowDefinition;
 import org.jenkinsci.plugins.workflow.job.WorkflowJob;
 import org.jenkinsci.plugins.workflow.job.WorkflowRun;
-import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.jvnet.hudson.test.JenkinsRule;
@@ -47,22 +46,27 @@ public class UseRemoteLibraryStepTest {
 
     @Test
     @LocalData
-    public void test() throws Exception {
+    public void testCall() throws Exception {
         WorkflowJob job = createWorkflow("test", true,
-                        "useRemoteLibrary 'file://"+j.getInstance().getRootDir().getAbsolutePath()+"/testlibrary/.git'\n" +
-                        "helloFlow.call()");
+                                         "useRemoteLibrary 'file://"+j.getInstance().getRootDir().getAbsolutePath()+"/testlibrary/.git'\n" +
+                                                 "echo 'something'\n" +
+                                                 "helloFlow.call()\n" +
+                                                 "echo 'good bye'");
         QueueTaskFuture<WorkflowRun> future = job.scheduleBuild2(0);
         j.assertBuildStatusSuccess(future);
-        j.assertLogContains("Hello groovy World!", future.get());
+        WorkflowRun run = future.get();
+        j.assertLogContains("something", run);
+        j.assertLogContains("Hello groovy World!", run);
+        j.assertLogContains("something", run);
     }
 
-    @Ignore("Doesn't work to call echo from a classpath class (yet)")
+    //@Ignore("Doesn't work to call echo from a classpath class (yet)")
     @Test
     @LocalData
     public void testSay() throws Exception {
         WorkflowJob job = createWorkflow("test", true,
-                "useRemoteLibrary 'file://"+j.getInstance().getRootDir().getAbsolutePath()+"/testlibrary/.git'\n" +
-                        "sayHello.call()");
+                                         "useRemoteLibrary 'file://"+j.getInstance().getRootDir().getAbsolutePath()+"/testlibrary/.git'\n" +
+                                                 "sayHello()");
         QueueTaskFuture<WorkflowRun> future = job.scheduleBuild2(0);
         j.assertBuildStatusSuccess(future);
         j.assertLogContains("Hello groovy World!", future.get());
