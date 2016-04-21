@@ -59,7 +59,8 @@ class FileLoaderDSLImpl implements Serializable {
 
           // Checkout
           script.echo "Checking out ${repoUrl}, branch=${repoBranch}"
-          script.git changelog: false, poll: false, url: repoUrl, branch: repoBranch, credentialsId: credentialsId
+          script.checkout changelog: false, poll: false, scm: [$class: 'GitSCM', branches: [[name: repoBranch]], 
+                          userRemoteConfigs: [[credentialsId: credentialsId, url: repoUrl]]]
           
           // Invoke body in the folder
           body();
