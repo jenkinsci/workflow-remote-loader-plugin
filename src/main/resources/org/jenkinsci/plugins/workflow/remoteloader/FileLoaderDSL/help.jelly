@@ -13,6 +13,15 @@ The variable provides following methods:
       <b>withGit(String repository, String branch, String credentialsId, String labelExpression)</b> 
       - wrapper closure for multiple files loading from a same Git repo
   </li>
+  <li><b>fromSVN(String libPath, String repositoryUrl, String credentialsId, 
+      String labelExpression)</b> - loading of a single Groovy file from the specified SVN repository
+  </li>
+  <li>
+      <b>withSVN(String repositoryUrl, String credentialsId, String labelExpression)</b> 
+      - wrapper closure for multiple files loading from a same SVN repo
+  </li>
+
+  
   <li><b>load(String libPath)</b> - loading of an object from a Groovy file specified by the relative path. 
       Also can be used within `withGit()` closure to load multiple objects at once
   </li>
@@ -27,6 +36,10 @@ Parameters:
       <b>repository</b> - string representation of a path to Git repository. 
         Supports all formats supported by 
         <a href="https://wiki.jenkins-ci.org/display/JENKINS/Git+Plugin">Git Plugin</a>
+  </li>
+  
+  <li>
+      <b>repositoryUrl</b> - string representation of a path to SVN repository. 
   </li>
   <li><b>branch</b> - Optional: Branch to be used (it's also possible to specify labels). 
         Default value: <b>master</b>
