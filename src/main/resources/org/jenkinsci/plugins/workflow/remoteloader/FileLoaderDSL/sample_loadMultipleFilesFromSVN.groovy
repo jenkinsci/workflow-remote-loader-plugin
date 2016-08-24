@@ -1,6 +1,6 @@
 stage 'Load files from GitHub'
 def environment, helloworld
-fileLoader.withSVN('https://github.com/jenkinsci/workflow-remote-loader-plugin/trunk/examples') {
+fileLoader.withSVN('https://github.com/jenkinsci/workflow-remote-loader-plugin/trunk/examples@HEAD') {
     helloworld = fileLoader.load('fileLoader/helloworld');
     environment = fileLoader.load('fileLoader/environment');
 }
