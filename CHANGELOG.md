@@ -3,6 +3,11 @@ Changelog
 
 This page contains release notes for the Pipeline Remote Loader Plugin.
 
+Version 1.3 (Sep 9, 2016)
+----
+
+* [PR #10](https://github.com/jenkinsci/workflow-remote-loader-plugin/pull/10) - Add support of loading files from SVN ([JENKINS-37651](https://issues.jenkins-ci.org/browse/JENKINS-37651))
+
 Version 1.2 (May 9, 2016)
 ----
 
