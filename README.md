@@ -17,11 +17,16 @@ The plugin adds a global `fileLoader` DSL variable, which provides methods for l
 The `fileLoader` variable provides the following methods:
 * `fromGit(String libPath, String repository, String branch, String credentialsId, String labelExpression)` - loading of a single Groovy file from the specified Git repository
 * `withGit(String repository, String branch, String credentialsId, String labelExpression)` - wrapper closure for multiple files loading from a same Git repo
+* `fromSVN(String libPath, String repository, String credentialsId, String labelExpression)` - loading of a single Groovy file from the specified SVN repository
+* `withSVN(String repository, String credentialsId, String labelExpression)` - wrapper closure for multiple files loading from a same SVN repo
+
 * `load(String libPath)` - loading of an object from a Groovy file specified by the relative path. Also can be used within `withGit()` closure to load multiple objects at once
 
 Parameters:
 * `libPath` - a relative path to the file, ".groovy" extension will be added automatically
-* `repository` - string representation of a path to Git repository. Supports all formats supported by [Git Plugin](https://wiki.jenkins-ci.org/display/JENKINS/Git+Plugin)
+* `repository` 
+    * for Git - string representation of a path to Git repository. Supports all formats supported by [Git Plugin](https://wiki.jenkins-ci.org/display/JENKINS/Git+Plugin)
+    * for SVN - string representation of a path to/or inside an SVN repository.
 * `branch` - Optional: Branch to be used (it's also possible to specify labels). Default value: `master`
 * `credentialsId` - Optional: Credentials to be used for the Git repo checkout. Default value: `null` (unauthorized access)
 * `labelExpression` - Optional: label expression, which specifies a node to be used for checkout. Default value: empty string (runs on any node)

@@ -50,6 +50,23 @@ public class FileLoaderDSLTest {
     @Rule
     public JenkinsRule j = new JenkinsRule();
     
+
+    @Test
+    public void loadSingleFileFromSVN() throws Exception {
+        assertSnippet("loadSingleFileFromSVN", false);
+    }
+    
+    @Test
+    public void loadSingleFileFromSVN_Sandbox() throws Exception {
+        assertSnippet("loadSingleFileFromSVN", true);
+    }
+    
+    @Test
+    public void loadMultipleFilesFromSVN() throws Exception {
+        assertSnippet("loadMultipleFilesFromSVN", false);
+    }
+
+
     @Test
     public void loadSingleFileFromGit() throws Exception {
         assertSnippet("loadSingleFileFromGit", false);

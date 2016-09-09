@@ -71,6 +71,37 @@ class FileLoaderDSLImpl implements Serializable {
       }
     }
   }
+
+  public Object fromSVN(String libPath, String repoUrl = DEFAULT_REPO_URL,  
+    String credentialsId = null, labelExpression = '') {
+      Object res;
+      withSVN(repoUrl, credentialsId, labelExpression) {
+        res = load(libPath)
+      }
+      return res
+    }
+  
+  public <V> V withSVN(String repoUrl = DEFAULT_REPO_URL,  
+        String credentialsId = null, labelExpression = '', Closure<V> body) {
+    Map<String, Object> loaded = new TreeMap<String, Object>()
+    node(labelExpression) {
+      withTimestamper {
+        script.dir(TMP_FOLDER) {
+          // Flush the directory
+          script.deleteDir()
+
+          // Checkout
+          script.echo "Checking out ${repoUrl}"
+          script.checkout changelog: false, poll: false, scm: [$class: 'SubversionSCM',  locations: [[credentialsId: credentialsId, local: '.', remote: repoUrl]], workspaceUpdater: [$class: 'UpdateUpdater']]
+
+          
+          // Invoke body in the folder
+          body();
+        }
+      }
+    }
+  }
+
   
   public Object load(String libPath) {
     def effectiveLibPath = libPath.endsWith(".groovy") ? libPath : libPath + ".groovy";
