@@ -63,3 +63,6 @@ environment.dumpEnvVars()
 
 ## License
 [MIT License](http://opensource.org/licenses/MIT)
+
+## Changelog
+[Change log](CHANGELOG.md)
