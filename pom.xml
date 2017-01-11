@@ -34,6 +34,13 @@
       <name>Oleg Nenashev</name>
       <email>o.v.nenashev@gmail.com</email>
       <roles>
+        <role>creator (retired)</role>
+      </roles>
+    </developer>
+    <developer>
+      <id>escoem</id>
+      <name>Emilio Escobar</name>
+      <roles>
         <role>maintainer</role>
       </roles>
     </developer>
