@@ -45,7 +45,7 @@ public abstract class GroovyFileGlobalVariable extends GlobalVariable {
      */
     @Nonnull
     public String getClassName() {
-        return getClass().getName() + ".Impl";
+        return getClass().getName() + ".FileLoaderDSLImpl";
     }
 
     @Override 

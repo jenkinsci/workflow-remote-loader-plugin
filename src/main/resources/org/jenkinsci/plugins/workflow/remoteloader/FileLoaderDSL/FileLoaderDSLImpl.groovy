@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package org.jenkinsci.plugins.workflow.remoteloader
+package org.jenkinsci.plugins.workflow.remoteloader.FileLoaderDSL
 
 import org.jenkinsci.plugins.workflow.cps.CpsScript;
 
