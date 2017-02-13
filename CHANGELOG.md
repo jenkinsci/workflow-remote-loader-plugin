@@ -3,6 +3,11 @@ Changelog
 
 This page contains release notes for the Pipeline Remote Loader Plugin.
 
+Version 1.4 (Feb 13, 2017)
+----
+
+* [PR #13](https://github.com/jenkinsci/workflow-remote-loader-plugin/pull/13) - Failed to load persisted workflow state ([JENKINS-38418](https://issues.jenkins-ci.org/browse/JENKINS-38418))
+
 Version 1.3 (Sep 9, 2016)
 ----
 
