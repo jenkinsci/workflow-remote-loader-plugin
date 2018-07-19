@@ -40,18 +40,18 @@ class FileLoaderDSLImpl implements Serializable {
   }
 
   public Object fromGit(String libPath, String repoUrl = DEFAULT_REPO_URL, String repoBranch = DEFAULT_BRANCH, 
-    String credentialsId = null, labelExpression = '') {
+    String credentialsId = null, labelExpression = '', boolean skipNode = false) {
       Object res;
-      withGit(repoUrl, repoBranch, credentialsId, labelExpression) {
+      withGit(repoUrl, repoBranch, credentialsId, labelExpression, skipNode) {
         res = load(libPath)
       }
       return res
     }
   
   public <V> V withGit(String repoUrl = DEFAULT_REPO_URL, String repoBranch = DEFAULT_BRANCH, 
-        String credentialsId = null, labelExpression = '', Closure<V> body) {
+        String credentialsId = null, labelExpression = '', boolean skipNode = false, Closure<V> body) {
     Map<String, Object> loaded = new TreeMap<String, Object>()
-    node(labelExpression) {
+    node(labelExpression, skipNode) {
       withTimestamper {
         script.dir(TMP_FOLDER) {
           // Flush the directory
@@ -73,18 +73,18 @@ class FileLoaderDSLImpl implements Serializable {
   }
 
   public Object fromSVN(String libPath, String repoUrl = DEFAULT_REPO_URL,  
-    String credentialsId = null, labelExpression = '') {
+    String credentialsId = null, labelExpression = '', boolean skipNode = false) {
       Object res;
-      withSVN(repoUrl, credentialsId, labelExpression) {
+      withSVN(repoUrl, credentialsId, labelExpression, skipNode) {
         res = load(libPath)
       }
       return res
     }
   
   public <V> V withSVN(String repoUrl = DEFAULT_REPO_URL,  
-        String credentialsId = null, labelExpression = '', Closure<V> body) {
+        String credentialsId = null, labelExpression = '', boolean skipNode = false, Closure<V> body) {
     Map<String, Object> loaded = new TreeMap<String, Object>()
-    node(labelExpression) {
+    node(labelExpression, skipNode) {
       withTimestamper {
         script.dir(TMP_FOLDER) {
           // Flush the directory
@@ -93,7 +93,6 @@ class FileLoaderDSLImpl implements Serializable {
           // Checkout
           script.echo "Checking out ${repoUrl}"
           script.checkout changelog: false, poll: false, scm: [$class: 'SubversionSCM',  locations: [[credentialsId: credentialsId, local: '.', remote: repoUrl]], workspaceUpdater: [$class: 'UpdateUpdater']]
-
           
           // Invoke body in the folder
           body();
@@ -111,14 +110,18 @@ class FileLoaderDSLImpl implements Serializable {
     return lib;
   }
   
-  private <V> V node(String labelExpression = '', Closure<V> body) {
+  private <V> V node(String labelExpression = '', boolean skipNode, Closure<V> body) {
         // TODO: don't require a new node if the current one fits labels
         //if (script.env.HOME != null) {
         //    // Already inside a node block.
         //    body()
         // } else 
-        script.node(labelExpression) {
+        if (skipNode){
           body()
+        }else {
+          script.node(labelExpression) {
+            body()
+          }
         }
     }
     
