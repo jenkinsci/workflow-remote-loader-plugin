@@ -50,7 +50,6 @@ class FileLoaderDSLImpl implements Serializable {
   
   public <V> V withGit(String repoUrl = DEFAULT_REPO_URL, String repoBranch = DEFAULT_BRANCH, 
         String credentialsId = null, labelExpression = '', Closure<V> body) {
-    Map<String, Object> loaded = new TreeMap<String, Object>()
     node(labelExpression) {
       withTimestamper {
         script.dir(TMP_FOLDER) {
@@ -83,7 +82,6 @@ class FileLoaderDSLImpl implements Serializable {
   
   public <V> V withSVN(String repoUrl = DEFAULT_REPO_URL,  
         String credentialsId = null, labelExpression = '', Closure<V> body) {
-    Map<String, Object> loaded = new TreeMap<String, Object>()
     node(labelExpression) {
       withTimestamper {
         script.dir(TMP_FOLDER) {
