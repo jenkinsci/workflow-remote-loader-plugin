@@ -115,7 +115,7 @@ class FileLoaderDSLImpl implements Serializable {
         //    // Already inside a node block.
         //    body()
         // } else 
-        if (skipNode){
+        if (skipNodeCreation){
           body()
         } else {
           script.node(labelExpression) {
