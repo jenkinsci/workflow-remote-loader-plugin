@@ -5,7 +5,7 @@
   <parent>
     <groupId>org.jenkins-ci.plugins</groupId>
     <artifactId>plugin</artifactId>
-    <version>2.14</version>
+    <version>4.3</version>
     <relativePath />
   </parent>
   <groupId>org.jenkins-ci.plugins</groupId>
@@ -24,8 +24,8 @@
   </licenses>
 
   <properties>
-    <jenkins.version>1.609.1</jenkins.version>
-    <java.level>6</java.level>
+    <jenkins.version>2.164.3</jenkins.version>
+    <java.level>8</java.level>
   </properties>
 
   <developers>
@@ -66,29 +66,86 @@
       <url>https://repo.jenkins-ci.org/public/</url>
     </pluginRepository>
   </pluginRepositories>
-  
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>io.jenkins.tools.bom</groupId>
+        <artifactId>bom-2.164.x</artifactId>
+        <version>10</version>
+        <scope>import</scope>
+        <type>pom</type>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
   <dependencies>
     <dependency>
       <groupId>org.jenkins-ci.plugins.workflow</groupId>
-      <artifactId>workflow-aggregator</artifactId>
-      <version>1.11</version>
+      <artifactId>workflow-cps</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.jenkins-ci.plugins</groupId>
+      <artifactId>script-security</artifactId>
+    </dependency>
+    <dependency>
+      <artifactId>groovy-all</artifactId>
+      <groupId>org.codehaus.groovy</groupId>
+      <version>2.4.12</version>
+    </dependency>
+    <dependency>
+      <groupId>org.jenkins-ci.plugins</groupId>
+      <artifactId>matrix-project</artifactId>
+      <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.jenkins-ci.plugins</groupId>
       <artifactId>git</artifactId>
-      <version>2.4.0</version>
       <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.jenkins-ci.plugins</groupId>
       <artifactId>subversion</artifactId>
-      <version>2.5</version>
+      <version>2.13.1</version>
       <scope>test</scope>
     </dependency>
     <dependency>
-      <artifactId>groovy-all</artifactId>
-      <groupId>org.codehaus.groovy</groupId>
-      <version>2.0.5</version>
+      <groupId>org.jenkins-ci.plugins.workflow</groupId>
+      <artifactId>workflow-job</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.jenkins-ci.plugins.workflow</groupId>
+      <artifactId>workflow-step-api</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.jenkins-ci.plugins.workflow</groupId>
+      <artifactId>workflow-basic-steps</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.jenkins-ci.plugins.workflow</groupId>
+      <artifactId>workflow-durable-task-step</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.jenkinsci.plugins</groupId>
+      <artifactId>pipeline-model-api</artifactId>
+      <scope>test</scope>
+      <version>1.6.0</version>
+    </dependency>
+    <dependency>
+      <groupId>org.jenkinsci.plugins</groupId>
+      <artifactId>pipeline-model-definition</artifactId>
+      <scope>test</scope>
+      <version>1.6.0</version>
+    </dependency>
+    <dependency>
+      <artifactId>trilead-ssh2</artifactId>
+      <groupId>org.jenkins-ci</groupId>
+      <scope>test</scope>
+      <version>trilead-ssh2-build-217-jenkins-17</version>
     </dependency>
   </dependencies>
 </project>
