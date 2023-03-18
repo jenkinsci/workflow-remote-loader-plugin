@@ -146,10 +146,5 @@
       <artifactId>pipeline-model-definition</artifactId>
       <scope>test</scope>
     </dependency>
-    <dependency>
-      <groupId>org.jenkins-ci.plugins</groupId>
-      <artifactId>trilead-api</artifactId>
-      <scope>test</scope>
-    </dependency>
   </dependencies>
 </project>
