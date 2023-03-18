@@ -88,10 +88,6 @@
       <artifactId>script-security</artifactId>
     </dependency>
     <dependency>
-      <artifactId>groovy-all</artifactId>
-      <groupId>org.codehaus.groovy</groupId>
-    </dependency>
-    <dependency>
       <groupId>org.jenkins-ci.plugins</groupId>
       <artifactId>matrix-project</artifactId>
       <scope>test</scope>
