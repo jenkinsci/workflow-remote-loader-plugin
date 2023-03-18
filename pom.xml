@@ -24,8 +24,7 @@
   </licenses>
 
   <properties>
-    <jenkins.version>2.164.3</jenkins.version>
-    <java.level>8</java.level>
+    <jenkins.version>2.361.4</jenkins.version>
   </properties>
 
   <developers>
@@ -71,8 +70,8 @@
     <dependencies>
       <dependency>
         <groupId>io.jenkins.tools.bom</groupId>
-        <artifactId>bom-2.164.x</artifactId>
-        <version>10</version>
+        <artifactId>bom-2.361.x</artifactId>
+        <version>1887.vda_d0ddb_c15c4</version>
         <scope>import</scope>
         <type>pom</type>
       </dependency>
@@ -91,7 +90,6 @@
     <dependency>
       <artifactId>groovy-all</artifactId>
       <groupId>org.codehaus.groovy</groupId>
-      <version>2.4.12</version>
     </dependency>
     <dependency>
       <groupId>org.jenkins-ci.plugins</groupId>
@@ -106,8 +104,17 @@
     <dependency>
       <groupId>org.jenkins-ci.plugins</groupId>
       <artifactId>subversion</artifactId>
-      <version>2.13.1</version>
       <scope>test</scope>
+      <exclusions>
+        <exclusion>
+          <groupId>org.apache.sshd</groupId>
+          <artifactId>sshd-common</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.apache.sshd</groupId>
+          <artifactId>sshd-core</artifactId>
+        </exclusion>
+      </exclusions>
     </dependency>
     <dependency>
       <groupId>org.jenkins-ci.plugins.workflow</groupId>
