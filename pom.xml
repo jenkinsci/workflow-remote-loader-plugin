@@ -140,19 +140,16 @@
       <groupId>org.jenkinsci.plugins</groupId>
       <artifactId>pipeline-model-api</artifactId>
       <scope>test</scope>
-      <version>1.6.0</version>
     </dependency>
     <dependency>
       <groupId>org.jenkinsci.plugins</groupId>
       <artifactId>pipeline-model-definition</artifactId>
       <scope>test</scope>
-      <version>1.6.0</version>
     </dependency>
     <dependency>
-      <artifactId>trilead-ssh2</artifactId>
-      <groupId>org.jenkins-ci</groupId>
+      <groupId>org.jenkins-ci.plugins</groupId>
+      <artifactId>trilead-api</artifactId>
       <scope>test</scope>
-      <version>trilead-ssh2-build-217-jenkins-17</version>
     </dependency>
   </dependencies>
 </project>
