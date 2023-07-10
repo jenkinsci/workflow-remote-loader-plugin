@@ -29,6 +29,14 @@
 
   <developers>
     <developer>
+      <id>markewaite</id>
+      <name>Mark Waite</name>
+      <email>mark.earl.waite@gmail.com</email>
+      <roles>
+        <role>maintainer</role>
+      </roles>
+    </developer>
+    <developer>
       <id>oleg_nenashev</id>
       <name>Oleg Nenashev</name>
       <email>o.v.nenashev@gmail.com</email>
