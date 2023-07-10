@@ -2,14 +2,14 @@
 
 ## Summary
 
-The plugin simplifies the usage of the shared functionality in [Pipeline](https://github.com/jenkinsci/workflow-plugin) scripts.
+The plugin simplifies the usage of the shared functionality in [Pipeline](https://www.jenkins.io/doc/book/pipeline/) scripts.
 It allows Pipeline scripts to be stored in remote SCM iles and loads them on-demand.
 
 Supported features:
 * Groovy file loading from Git and Github (requires an installed Git plugin)
 
 The [Pipeline: Groovy Libraries](https://plugins.jenkins.io/pipeline-groovy-lib/) plugin replaces most of the functionality of this plugin.
-The [Pipeline chapter of the Jenkins User Handbook](https://jenkins.io/doc/book/pipeline/shared-libraries/) describes the [Pipeline: Groovy Libraries](https://plugins.jenkins.io/pipeline-groovy-lib/) plugin in detail.
+The [Pipeline shared libraries section of the Jenkins User Handbook](https://jenkins.io/doc/book/pipeline/shared-libraries/) describes the [Pipeline: Groovy Libraries](https://plugins.jenkins.io/pipeline-groovy-lib/) plugin in detail.
 
 ## Usage
 
@@ -28,7 +28,7 @@ The `fileLoader` variable provides the following methods:
 Parameters:
 * `libPath` - a relative path to the file, ".groovy" extension will be added automatically
 * `repository`
-    * for Git - string representation of a path to Git repository. Supports all formats supported by [Git Plugin](https://wiki.jenkins-ci.org/display/JENKINS/Git+Plugin)
+    * for Git - string representation of a path to Git repository. Supports all formats supported by [Git Plugin](https://plugins.jenkins.io/git/)
     * for SVN - string representation of a path to/or inside an SVN repository.
 * `branch` - Optional: Branch to be used (it's also possible to specify labels). Default value: `master`
 * `credentialsId` - Optional: Credentials to be used for the Git repo checkout. Default value: `null` (unauthorized access)
@@ -37,7 +37,7 @@ Parameters:
 
 ### Groovy file format
 
-The loading behaves similarly to the built-in `load` command, see [Pipeline documentation](https://github.com/jenkinsci/workflow-plugin/blob/master/TUTORIAL.md#manual-loading) for more info about library file syntax. Only one file is being loaded by commands from `fileLoader`. Use static initializers within the Groovy file of the loaded file to load more context from neighbor files.
+The loading behaves similarly to the built-in `load` command, see [Pipeline documentation](https://www.jenkins.io/doc/pipeline/steps/workflow-cps/#load-evaluate-a-groovy-source-file-into-the-pipeline-script) for more info about library file syntax. Only one file is being loaded by commands from `fileLoader`. Use static initializers within the Groovy file of the loaded file to load more context from neighbor files.
 
 ### Examples
 
