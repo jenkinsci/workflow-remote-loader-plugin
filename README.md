@@ -30,7 +30,7 @@ Parameters:
 * `branch` - Optional: Branch to be used (it's also possible to specify labels). Default value: `master`
 * `credentialsId` - Optional: Credentials to be used for the Git repo checkout. Default value: `null` (unauthorized access)
 * `labelExpression` - Optional: label expression, which specifies a node to be used for checkout. Default value: empty string (runs on any node)
-* `skipNodeCreation`- - Optional: If true the creation of a new node is skipped. Default value: false (creates a new node)
+* `skipNodeCreation` - Optional: If true the creation of a new node is skipped. Default value: false (creates a new node)
 
 ### Groovy file format
 
