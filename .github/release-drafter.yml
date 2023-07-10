@@ -1,0 +1,2 @@
+_extends: .github
+tag-template: workflow-remote-loader-$NEXT_MINOR_VERSION

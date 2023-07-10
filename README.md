@@ -66,4 +66,5 @@ environment.dumpEnvVars()
 [MIT License](http://opensource.org/licenses/MIT)
 
 ## Changelog
-[Change log](CHANGELOG.md)
+
+[GitHub releases](https://github.com/jenkinsci/workflow-remote-loader-plugin/releases)
