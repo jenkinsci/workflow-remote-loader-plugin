@@ -2,14 +2,14 @@
 
 ## Summary
 
+**The [Pipeline: Groovy Libraries](https://plugins.jenkins.io/pipeline-groovy-lib/) plugin replaces this plugin**.
+The [Pipeline shared libraries section of the Jenkins User Handbook](https://jenkins.io/doc/book/pipeline/shared-libraries/) describes the [Pipeline: Groovy Libraries](https://plugins.jenkins.io/pipeline-groovy-lib/) plugin in detail.
+
 The plugin simplifies the usage of the shared functionality in [Pipeline](https://www.jenkins.io/doc/book/pipeline/) scripts.
 It allows Pipeline scripts to be stored in remote SCM iles and loads them on-demand.
 
 Supported features:
 * Groovy file loading from Git and Github (requires an installed Git plugin)
-
-The [Pipeline: Groovy Libraries](https://plugins.jenkins.io/pipeline-groovy-lib/) plugin replaces most of the functionality of this plugin.
-The [Pipeline shared libraries section of the Jenkins User Handbook](https://jenkins.io/doc/book/pipeline/shared-libraries/) describes the [Pipeline: Groovy Libraries](https://plugins.jenkins.io/pipeline-groovy-lib/) plugin in detail.
 
 ## Usage
 
