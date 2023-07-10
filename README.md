@@ -3,10 +3,13 @@
 ## Summary
 
 The plugin simplifies the usage of the shared functionality in [Pipeline](https://github.com/jenkinsci/workflow-plugin) scripts.
-It allows to keep the logic in remote files in SCMs and load them on-demand.
+It allows Pipeline scripts to be stored in remote SCM iles and loads them on-demand.
 
 Supported features:
 * Groovy file loading from Git and Github (requires an installed Git plugin)
+
+The [Pipeline: Groovy Libraries](https://plugins.jenkins.io/pipeline-groovy-lib/) plugin replaces most of the functionality of this plugin.
+The [Pipeline chapter of the Jenkins User Handbook](https://jenkins.io/doc/book/pipeline/shared-libraries/) describes the [Pipeline: Groovy Libraries](https://plugins.jenkins.io/pipeline-groovy-lib/) plugin in detail.
 
 ## Usage
 
@@ -24,7 +27,7 @@ The `fileLoader` variable provides the following methods:
 
 Parameters:
 * `libPath` - a relative path to the file, ".groovy" extension will be added automatically
-* `repository` 
+* `repository`
     * for Git - string representation of a path to Git repository. Supports all formats supported by [Git Plugin](https://wiki.jenkins-ci.org/display/JENKINS/Git+Plugin)
     * for SVN - string representation of a path to/or inside an SVN repository.
 * `branch` - Optional: Branch to be used (it's also possible to specify labels). Default value: `master`
@@ -41,7 +44,7 @@ The loading behaves similarly to the built-in `load` command, see [Pipeline docu
 Loading a single Groovy file from Git:
 ```groovy
 stage 'Load a file from GitHub'
-def helloworld = fileLoader.fromGit('examples/fileLoader/helloworld', 
+def helloworld = fileLoader.fromGit('examples/fileLoader/helloworld',
         'https://github.com/jenkinsci/workflow-remote-loader-plugin.git', 'master', null, '')
 
 stage 'Run method from the loaded file'
